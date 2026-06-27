@@ -1,0 +1,289 @@
+@startuml Semang_ERD
+
+entity users {
+  * id : uuid <<PK>>
+  --
+  * name : varchar
+  * email : varchar <<UK>>
+  * phone_wa : varchar <<UK>>
+  ' password dikelola Supabase Auth (auth.users), tidak disimpan di tabel ini
+  email_verified_at : timestamp
+  phone_verified_at : timestamp
+  * locale : varchar
+  * created_at : timestamp
+  * updated_at : timestamp
+  deleted_at : timestamp
+}
+
+entity bank_accounts {
+  * id : uuid <<PK>>
+  --
+  * user_id : uuid <<FK>>
+  * bank_code : varchar
+  * account_number : varchar
+  * account_holder : varchar
+  * is_default : boolean
+  * created_at : timestamp
+  * updated_at : timestamp
+  deleted_at : timestamp
+}
+
+entity properties {
+  * id : uuid <<PK>>
+  --
+  * owner_id : uuid <<FK>>
+  * name : varchar
+  * city : varchar
+  * default_rent : bigint
+  * default_due_day : smallint
+  * timezone : varchar
+  * unique_code_enabled : boolean
+  * status : varchar
+  * created_at : timestamp
+  * updated_at : timestamp
+  deleted_at : timestamp
+}
+
+entity property_staff {
+  * id : uuid <<PK>>
+  --
+  * property_id : uuid <<FK>>
+  * user_id : uuid <<FK>>
+  * role : varchar
+  invited_at : timestamp
+  accepted_at : timestamp
+  * created_at : timestamp
+  revoked_at : timestamp
+}
+
+entity rooms {
+  * id : uuid <<PK>>
+  --
+  * property_id : uuid <<FK>>
+  * room_number : integer
+  label : varchar
+  rent_override : bigint
+  due_day_override : smallint
+  * status : varchar
+  * created_at : timestamp
+  * updated_at : timestamp
+  deleted_at : timestamp
+}
+
+entity tenants {
+  * id : uuid <<PK>>
+  --
+  * room_id : uuid <<FK>>
+  user_id : uuid <<FK>>
+  * name : varchar
+  * phone_wa : varchar
+  * moved_in_at : date
+  moved_out_at : date
+  notes : text
+  * created_at : timestamp
+  * updated_at : timestamp
+}
+
+entity invoices {
+  * id : uuid <<PK>>
+  --
+  * room_id : uuid <<FK>>
+  * tenant_id : uuid <<FK>>
+  * period : char(7)
+  * base_amount : bigint
+  unique_code : smallint
+  * total_amount : bigint
+  * currency : char(3)
+  * status : varchar
+  * due_date : date
+  * idempotency_key : varchar <<UK>>
+  sent_at : timestamp
+  paid_at : timestamp
+  overdue_at : timestamp
+  defaulted_at : timestamp
+  * created_at : timestamp
+  * updated_at : timestamp
+}
+
+entity invoice_items {
+  * id : uuid <<PK>>
+  --
+  * invoice_id : uuid <<FK>>
+  * kind : varchar
+  * description : varchar
+  * amount : bigint
+  metadata : jsonb
+  * created_at : timestamp
+}
+
+entity proofs {
+  * id : uuid <<PK>>
+  --
+  * invoice_id : uuid <<FK>>
+  * storage_key : varchar
+  * mime_type : varchar
+  file_size : bigint
+  * status : varchar
+  rejection_reason : text
+  decided_by : uuid <<FK>>
+  decided_at : timestamp
+  * uploaded_at : timestamp
+  * created_at : timestamp
+}
+
+entity payments {
+  * id : uuid <<PK>>
+  --
+  * invoice_id : uuid <<FK>>
+  proof_id : uuid <<FK>>
+  * source : varchar
+  * amount : bigint
+  * status : varchar
+  provider : varchar
+  provider_ref : varchar <<UK>>
+  provider_fee : bigint
+  provider_payload : jsonb
+  * idempotency_key : varchar <<UK>>
+  confirmed_by : uuid <<FK>>
+  paid_at : timestamp
+  * created_at : timestamp
+  * updated_at : timestamp
+}
+
+entity invoice_events {
+  * id : uuid <<PK>>
+  --
+  * invoice_id : uuid <<FK>>
+  actor_id : uuid <<FK>>
+  * event_type : varchar
+  from_status : varchar
+  to_status : varchar
+  metadata : jsonb
+  * created_at : timestamp
+}
+
+entity notifications {
+  * id : uuid <<PK>>
+  --
+  * invoice_id : uuid <<FK>>
+  * recipient_phone : varchar
+  * kind : varchar
+  * channel : varchar
+  * payload : text
+  * status : varchar
+  provider_ref : varchar
+  opened_at : timestamp
+  sent_at : timestamp
+  * created_at : timestamp
+}
+
+entity public_tokens {
+  * id : uuid <<PK>>
+  --
+  * kind : varchar
+  * target_id : uuid
+  * token_hash : varchar <<UK>>
+  * expires_at : timestamp
+  used_at : timestamp
+  * created_at : timestamp
+}
+
+entity plans {
+  * id : uuid <<PK>>
+  --
+  * code : varchar <<UK>>
+  * name : varchar
+  * price_per_room : bigint
+  * min_monthly : bigint
+  * max_rooms : integer
+  * max_properties : integer
+  * is_active : boolean
+  * created_at : timestamp
+  * updated_at : timestamp
+}
+
+entity plan_features {
+  * id : uuid <<PK>>
+  --
+  * plan_id : uuid <<FK>>
+  * feature_key : varchar
+  * enabled : boolean
+  limit_value : integer
+  * created_at : timestamp
+}
+
+entity subscriptions {
+  * id : uuid <<PK>>
+  --
+  * owner_id : uuid <<FK>>
+  * plan_id : uuid <<FK>>
+  * status : varchar
+  * billing_cycle : varchar
+  trial_invoices_left : smallint
+  current_period_start : date
+  current_period_end : date
+  cancelled_at : timestamp
+  * created_at : timestamp
+  * updated_at : timestamp
+}
+
+entity subscription_addons {
+  * id : uuid <<PK>>
+  --
+  * subscription_id : uuid <<FK>>
+  * feature_key : varchar
+  * price_monthly : bigint
+  * status : varchar
+  activated_at : timestamp
+  deactivated_at : timestamp
+  * created_at : timestamp
+}
+
+entity webhook_logs {
+  * id : uuid <<PK>>
+  --
+  * source : varchar
+  * event_type : varchar
+  * idempotency_key : varchar <<UK>>
+  * payload : jsonb
+  * processed : boolean
+  attempt_count : integer
+  last_error : text
+  processed_at : timestamp
+  * created_at : timestamp
+}
+
+' ============================================================
+' RELASI
+' ============================================================
+
+users          ||--o{ bank_accounts      : "has bank account"
+users          ||--o{ properties         : "owns"
+users          |o--o{ property_staff     : "staffs at"
+users          |o--o{ tenants            : "links as (Phase 2)"
+users          ||--o| subscriptions      : "subscribes via"
+
+properties     ||--o{ property_staff     : "is managed by"
+properties     ||--|{ rooms              : "consists of"
+
+rooms          ||--o{ tenants            : "is occupied by"
+rooms          ||--o{ invoices           : "is billed through"
+
+tenants        ||--o{ invoices           : "is liable for"
+
+invoices       ||--|{ invoice_items      : "is itemized in"
+invoices       ||--o{ proofs             : "is evidenced by"
+invoices       ||--o{ payments           : "is paid through"
+invoices       ||--o{ invoice_events     : "is logged in"
+invoices       ||--o{ notifications      : "is notified via"
+
+proofs         |o--o| payments           : "backs"
+users          |o--o{ proofs             : "decides"
+users          |o--o{ payments           : "confirms"
+users          |o--o{ invoice_events     : "acts in"
+
+plans          ||--o{ plan_features      : "bundles"
+plans          ||--o{ subscriptions      : "is chosen in"
+subscriptions  ||--o{ subscription_addons : "is extended by"
+
+@enduml
