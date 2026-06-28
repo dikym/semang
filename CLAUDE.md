@@ -6,11 +6,11 @@
 
 Setelah Anda membuat, mengubah, atau menghapus kode, Anda **WAJIB** menjalankan perintah berikut untuk memastikan kualitas kode:
 
-1. **Frontend (JS/Svelte):**
+1. **Frontend:**
     ```bash
-    npm run format
-    npm run lint:fix
-    npm run check
+    bun run format
+    bun run lint:fix
+    bun run check
     ```
 
 ## Git Commits
