@@ -290,10 +290,11 @@ create index idx_plan_features_plan_id on plan_features(plan_id);
 create or replace function update_updated_at()
 returns trigger as $$
 begin
-  new.updated_at = now();
+  new.updated_at = pg_catalog.now();
   return new;
 end;
-$$ language plpgsql;
+$$ language plpgsql
+set search_path = '';
 
 create trigger trg_users_updated_at
   before update on users for each row execute function update_updated_at();
