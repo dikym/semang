@@ -1,13 +1,7 @@
 export type { Database, Json } from "./database";
 
 export type InvoiceStatus =
-	| "draft"
-	| "terjadwal"
-	| "terkirim"
-	| "menunggu_konfirmasi"
-	| "lunas"
-	| "telat"
-	| "menunggak";
+	"draft" | "terjadwal" | "terkirim" | "menunggu_konfirmasi" | "lunas" | "telat" | "menunggak";
 
 export type ProofStatus = "pending" | "diterima" | "ditolak";
 

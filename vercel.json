@@ -1,20 +1,20 @@
 {
-  "crons": [
-    {
-      "path": "/api/cron/generate-invoices",
-      "schedule": "0 19 * * *"
-    },
-    {
-      "path": "/api/cron/run-timeouts",
-      "schedule": "0 20 * * *"
-    },
-    {
-      "path": "/api/cron/monthly-summary",
-      "schedule": "0 23 1 * *"
-    },
-    {
-      "path": "/api/cron/cleanup-tokens",
-      "schedule": "0 17 * * 6"
-    }
-  ]
+	"crons": [
+		{
+			"path": "/api/cron/generate-invoices",
+			"schedule": "0 19 * * *"
+		},
+		{
+			"path": "/api/cron/run-timeouts",
+			"schedule": "0 20 * * *"
+		},
+		{
+			"path": "/api/cron/monthly-summary",
+			"schedule": "0 23 1 * *"
+		},
+		{
+			"path": "/api/cron/cleanup-tokens",
+			"schedule": "0 17 * * 6"
+		}
+	]
 }
