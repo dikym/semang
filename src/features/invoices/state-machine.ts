@@ -6,7 +6,7 @@ type Transition = {
 };
 
 // Transisi valid sesuai TRD §5.1
-const VALID_TRANSITIONS: Transition[] = [
+export const VALID_TRANSITIONS: Transition[] = [
 	{ from: "draft", to: "terjadwal" },
 	{ from: "terjadwal", to: "terkirim" },
 	{ from: "terkirim", to: "menunggu_konfirmasi" },
