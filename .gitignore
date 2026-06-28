@@ -43,3 +43,10 @@ next-env.d.ts
 
 # IDE
 .idea/
+
+# local tooling
+.claude/
+.superpowers/
+
+# planning docs
+docs/superpowers/
