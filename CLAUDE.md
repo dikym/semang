@@ -1,4 +1,4 @@
-# CLAUDE.md — Admin Bali Beauty Center
+# CLAUDE.md — Semang
 
 ## Code Formatting & Quality
 
