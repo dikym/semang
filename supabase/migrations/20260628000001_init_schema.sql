@@ -19,7 +19,7 @@ create table users (
 );
 
 create table bank_accounts (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   user_id uuid not null references users(id) on delete cascade,
   bank_code varchar not null,
   account_number varchar not null,
@@ -35,7 +35,7 @@ create table bank_accounts (
 -- ============================================================
 
 create table plans (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   code varchar not null unique,
   name varchar not null,
   price_per_room bigint not null default 0,
@@ -48,7 +48,7 @@ create table plans (
 );
 
 create table plan_features (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   plan_id uuid not null references plans(id) on delete cascade,
   feature_key varchar not null,
   enabled boolean not null default true,
@@ -57,7 +57,7 @@ create table plan_features (
 );
 
 create table subscriptions (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   owner_id uuid not null references users(id) on delete cascade,
   plan_id uuid not null references plans(id),
   status varchar not null default 'active',
@@ -71,7 +71,7 @@ create table subscriptions (
 );
 
 create table subscription_addons (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   subscription_id uuid not null references subscriptions(id) on delete cascade,
   feature_key varchar not null,
   price_monthly bigint not null,
@@ -86,7 +86,7 @@ create table subscription_addons (
 -- ============================================================
 
 create table properties (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   owner_id uuid not null references users(id) on delete cascade,
   name varchar not null,
   city varchar not null,
@@ -101,7 +101,7 @@ create table properties (
 );
 
 create table property_staff (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   property_id uuid not null references properties(id) on delete cascade,
   user_id uuid not null references users(id) on delete cascade,
   role varchar not null,
@@ -112,7 +112,7 @@ create table property_staff (
 );
 
 create table rooms (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   property_id uuid not null references properties(id) on delete cascade,
   room_number integer not null check (room_number between 1 and 999),
   label varchar,
@@ -126,7 +126,7 @@ create table rooms (
 );
 
 create table tenants (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   room_id uuid not null references rooms(id) on delete cascade,
   user_id uuid references users(id),
   name varchar not null,
@@ -143,7 +143,7 @@ create table tenants (
 -- ============================================================
 
 create table invoices (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   room_id uuid not null references rooms(id),
   tenant_id uuid not null references tenants(id),
   period char(7) not null,
@@ -164,7 +164,7 @@ create table invoices (
 );
 
 create table invoice_items (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   invoice_id uuid not null references invoices(id) on delete cascade,
   kind varchar not null,
   description varchar not null,
@@ -174,7 +174,7 @@ create table invoice_items (
 );
 
 create table proofs (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   invoice_id uuid not null references invoices(id) on delete cascade,
   storage_key varchar not null,
   mime_type varchar not null,
@@ -188,7 +188,7 @@ create table proofs (
 );
 
 create table payments (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   invoice_id uuid not null references invoices(id),
   proof_id uuid references proofs(id),
   source varchar not null,
@@ -206,7 +206,7 @@ create table payments (
 );
 
 create table invoice_events (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   invoice_id uuid not null references invoices(id) on delete cascade,
   actor_id uuid references users(id),
   event_type varchar not null,
@@ -221,7 +221,7 @@ create table invoice_events (
 -- ============================================================
 
 create table notifications (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   invoice_id uuid not null references invoices(id) on delete cascade,
   recipient_phone varchar not null,
   kind varchar not null,
@@ -235,7 +235,7 @@ create table notifications (
 );
 
 create table public_tokens (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   kind varchar not null,
   target_id uuid not null,
   token_hash varchar not null unique,
@@ -249,7 +249,7 @@ create table public_tokens (
 -- ============================================================
 
 create table webhook_logs (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   source varchar not null,
   event_type varchar not null,
   idempotency_key varchar not null unique,
