@@ -1,5 +1,3 @@
-import { LogoMark } from "./logo";
-
 const columns = [
 	{
 		title: "Produk",
@@ -27,9 +25,7 @@ export function Footer() {
 				<div className="mb-9 flex flex-wrap justify-between gap-8">
 					<div className="max-w-75">
 						<div className="mb-3.5 flex items-center gap-2.75">
-							<span className="flex size-9 items-center justify-center rounded-md bg-teal-500 text-white">
-								<LogoMark className="size-5.25" />
-							</span>
+							<img src="/logo.svg" alt="Semang" className="size-9 rounded-md" />
 							<span className="text-lg font-extrabold tracking-tight text-teal-900">
 								Semang
 							</span>

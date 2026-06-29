@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { LogoMark } from "./logo";
+
 
 const links = [
 	{ href: "#problems", label: "Masalah" },
@@ -18,9 +18,7 @@ export function Nav() {
 			<nav className="border-border bg-background/80 sticky top-0 z-50 border-b backdrop-blur-md">
 				<div className="container flex items-center justify-between py-3.5">
 					<a href="#top" className="flex items-center gap-3">
-						<span className="shadow-warm-teal flex size-9.5 items-center justify-center rounded-md bg-teal-500 text-white">
-							<LogoMark className="size-5.5" />
-						</span>
+						<img src="/logo.svg" alt="Semang" className="size-9.5 rounded-md" />
 						<span className="text-xl font-extrabold tracking-tight text-teal-900">
 							Semang
 						</span>
@@ -69,9 +67,7 @@ export function Nav() {
 								className="flex items-center gap-3"
 								onClick={() => setOpen(false)}
 							>
-								<span className="shadow-warm-teal flex size-9.5 items-center justify-center rounded-md bg-teal-500 text-white">
-									<LogoMark className="size-5.5" />
-								</span>
+								<img src="/logo.svg" alt="Semang" className="size-9.5 rounded-md" />
 								<span className="text-xl font-extrabold tracking-tight text-teal-900">
 									Semang
 								</span>
