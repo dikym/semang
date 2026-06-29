@@ -27,7 +27,7 @@ export function Problems() {
 		<section id="problems" className="container scroll-mt-16 py-10 md:py-14 lg:py-18">
 			<SectionHeading
 				eyebrow="Tiga hal yang paling melelahkan"
-				title="Mengelola kost pakai buku & chat itu capek"
+				title="Mengelola kost pakai buku catatan & chat itu capek"
 				description="Semang dirancang langsung dari tiga keluhan terbesar pemilik kost di Indonesia."
 			/>
 			<div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

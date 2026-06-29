@@ -13,7 +13,7 @@ export function Hero() {
 					<div className="mb-6 inline-flex items-center gap-2 rounded-full bg-teal-100 px-3.5 py-1.5">
 						<span className="size-1.5 rounded-full bg-teal-500" />
 						<span className="text-xs font-bold tracking-wider text-teal-700 uppercase">
-							Pengganti notes &amp; WhatsApp
+							Pengganti buku catatan &amp; WhatsApp
 						</span>
 					</div>
 					<h1 className="mb-5 text-[clamp(2.125rem,5.2vw,3.375rem)] leading-none font-extrabold tracking-tight text-balance text-teal-900">
@@ -22,7 +22,7 @@ export function Hero() {
 					<p className="text-warm-600 mb-8 max-w-130 text-lg leading-relaxed text-pretty sm:text-xl">
 						Tanpa kamu menagih siapa-siapa. Semang menyiapkan pesan tagihan WhatsApp
 						atas nama kost-mu, mencatat tiap pembayaran, dan merapikan semuanya —
-						pengganti buku tulis &amp; chat pribadi.
+						pengganti buku catatan &amp; chat pribadi.
 					</p>
 					<div className="mb-7 flex flex-wrap gap-3">
 						<a
@@ -94,7 +94,7 @@ function PhoneMockup() {
 							ini:
 						</div>
 						<div className="text-info mt-2 text-xs font-semibold break-all">
-							semang.vercel.com/p/proof/k3-92fa
+							semang.vercel.app/p/proof/k3-92fa
 						</div>
 						<div className="text-warm-400 mt-1 text-right text-xs">09.41 ✓✓</div>
 					</div>
