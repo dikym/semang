@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const columns = [
 	{
 		title: "Produk",
@@ -25,7 +27,7 @@ export function Footer() {
 				<div className="mb-9 flex flex-wrap justify-between gap-8">
 					<div className="max-w-75">
 						<div className="mb-3.5 flex items-center gap-2.75">
-							<img src="/logo.svg" alt="Semang" className="size-9 rounded-md" />
+							<Image src="/logo.svg" alt="Semang" width={36} height={36} className="size-9 rounded-md" />
 							<span className="text-lg font-extrabold tracking-tight text-teal-900">
 								Semang
 							</span>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 
@@ -18,7 +19,7 @@ export function Nav() {
 			<nav className="border-border bg-background/80 sticky top-0 z-50 border-b backdrop-blur-md">
 				<div className="container flex items-center justify-between py-3.5">
 					<a href="#top" className="flex items-center gap-3">
-						<img src="/logo.svg" alt="Semang" className="size-9.5 rounded-md" />
+						<Image src="/logo.svg" alt="Semang" width={38} height={38} className="size-9.5 rounded-md" />
 						<span className="text-xl font-extrabold tracking-tight text-teal-900">
 							Semang
 						</span>
@@ -67,7 +68,7 @@ export function Nav() {
 								className="flex items-center gap-3"
 								onClick={() => setOpen(false)}
 							>
-								<img src="/logo.svg" alt="Semang" className="size-9.5 rounded-md" />
+								<Image src="/logo.svg" alt="Semang" width={38} height={38} className="size-9.5 rounded-md" />
 								<span className="text-xl font-extrabold tracking-tight text-teal-900">
 									Semang
 								</span>
