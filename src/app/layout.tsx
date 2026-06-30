@@ -15,10 +15,45 @@ const geistMono = Geist_Mono({
 	preload: false
 });
 
+const baseUrl =
+	process.env.NEXT_PUBLIC_APP_URL ?? "https://semang.vercel.app";
+
 export const metadata: Metadata = {
-	title: "Semang",
+	metadataBase: new URL(baseUrl),
+	title: {
+		default: "Semang",
+		template: "%s | Semang"
+	},
 	description:
-		"Kost-mu ditagih otomatis, uang masuk tercatat sendiri, tanpa kamu menagih siapa-siapa."
+		"Kost-mu ditagih otomatis, uang masuk tercatat sendiri, tanpa kamu menagih siapa-siapa.",
+	openGraph: {
+		title: "Semang",
+		description:
+			"Kost-mu ditagih otomatis, uang masuk tercatat sendiri, tanpa kamu menagih siapa-siapa.",
+		url: baseUrl,
+		siteName: "Semang",
+		images: [
+			{
+				url: "/og-image.png",
+				width: 1200,
+				height: 630,
+				alt: "Semang — Manajemen kost otomatis"
+			}
+		],
+		locale: "id_ID",
+		type: "website"
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Semang",
+		description:
+			"Kost-mu ditagih otomatis, uang masuk tercatat sendiri, tanpa kamu menagih siapa-siapa.",
+		images: ["/og-image.png"]
+	},
+	robots: {
+		index: true,
+		follow: true
+	}
 };
 
 export default function RootLayout({
