@@ -94,7 +94,7 @@ function PhoneMockup() {
 							ini:
 						</div>
 						<div className="text-info mt-2 text-xs font-semibold break-all">
-							semang.vercel.app/p/proof/k3-92fa
+							semang.id/p/proof/k3-92fa
 						</div>
 						<div className="text-warm-400 mt-1 text-right text-xs">09.41 ✓✓</div>
 					</div>

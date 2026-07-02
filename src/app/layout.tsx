@@ -15,8 +15,7 @@ const geistMono = Geist_Mono({
 	preload: false
 });
 
-const baseUrl =
-	process.env.NEXT_PUBLIC_APP_URL ?? "https://semang.vercel.app";
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://semang.id";
 
 export const metadata: Metadata = {
 	metadataBase: new URL(baseUrl),
